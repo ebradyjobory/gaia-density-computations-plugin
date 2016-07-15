@@ -1,0 +1,16 @@
+{
+  "_type": "my_gaia_plugins.fake_plugin.FakeProcess",
+  "inputs": [
+    {
+      "name": "input",
+      "_type": "my_gaia_plugins.fake_plugin.FakeIO",
+      "uri": "/tmp/bogus.geojson"
+    },
+    {
+      "name": "input",
+      "_type": "my_gaia_plugins.another_fake_plugin.AnotherFakeIO",
+      "uri": "/tmp/bogus.tif"
+    }
+  ],
+  "var_col": "num_hospitals"
+}
