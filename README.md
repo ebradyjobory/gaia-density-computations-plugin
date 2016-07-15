@@ -13,7 +13,7 @@ To run an example:
     - pip install -e .
     - cd ..
   - Run the Gaia parser on the provided test.json file:
-    - python gaia/gaia/parser.py gaia_plugin_demo/test.py
+    - python gaia/gaia/parser.py gaia_plugin_demo/test.json
 
 The output should be:
 
