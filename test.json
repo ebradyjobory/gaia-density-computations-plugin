@@ -1,14 +1,14 @@
 {
-  "_type": "my_gaia_plugins.fake_plugin.FakeProcess",
+  "_type": "gaia_plugin_demo.fake_plugin.FakeProcess",
   "inputs": [
     {
       "name": "input",
-      "_type": "my_gaia_plugins.fake_plugin.FakeIO",
+      "_type": "gaia_plugin_demo.fake_plugin.FakeIO",
       "uri": "/tmp/bogus.geojson"
     },
     {
       "name": "input",
-      "_type": "my_gaia_plugins.another_fake_plugin.AnotherFakeIO",
+      "_type": "gaia_plugin_demo.another_fake_plugin.AnotherFakeIO",
       "uri": "/tmp/bogus.tif"
     }
   ],
