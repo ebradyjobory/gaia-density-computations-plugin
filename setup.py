@@ -10,8 +10,8 @@ setup(
   include_package_data=True,
   entry_points={
     'gaia.plugins': [
-            "fake_plugin = my_gaia_plugins.fake_plugin",
-            "another_fake_plugin = my_gaia_plugins.another_fake_plugin"
+            "fake_plugin = gaia_plugin_demo.fake_plugin",
+            "another_fake_plugin = gaia_plugin_demo.another_fake_plugin"
         ]
   }
 )
