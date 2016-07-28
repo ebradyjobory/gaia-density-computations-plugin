@@ -9,7 +9,7 @@ class FakeIO(GaiaIO):
         super(FakeIO, self).__init__(uri=uri, **kwargs)
         print("Created FakeIO")
         print("Value of Gaia plugin config: {}".format(
-            config.get('gaia_plugin_demo', 'demo_setting')))
+            config.get('gaia_plugin_demo')))
 
     def read(self, *args, **kwargs):
         pass

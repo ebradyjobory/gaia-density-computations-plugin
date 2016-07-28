@@ -1,6 +1,7 @@
 from gaia.inputs import GaiaIO
 from gaia.gaia_process import GaiaProcess
 
+
 class AnotherFakeIO(GaiaIO):
 
     def __init__(self, uri='', **kwargs):
