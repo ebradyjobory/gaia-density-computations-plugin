@@ -1,9 +1,9 @@
 {
-  "_type": "gaia_plugin_demo.fake_plugin.FakeProcess",
+  "_type": "gaia_plugin_demo.a_fake_plugin.FakeProcess",
   "inputs": [
     {
       "name": "input",
-      "_type": "gaia_plugin_demo.fake_plugin.FakeIO",
+      "_type": "gaia_plugin_demo.a_fake_plugin.FakeIO",
       "uri": "/tmp/bogus.geojson"
     },
     {
