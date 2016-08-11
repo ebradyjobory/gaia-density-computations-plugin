@@ -20,6 +20,7 @@ import gaia.formats as formats
 import gdal, ogr, os
 import numpy as np
 import itertools
+import geopandas
 
 from gaia.inputs import GaiaIO
 from gaia.gaia_process import GaiaProcess
@@ -40,7 +41,7 @@ class LeastCostProcess(GaiaProcess):
         super(LeastCostProcess, self).__init__(**kwargs)
 
         if not self.output:
-            self.output = VectorFileIO(name='result', uri=self.get_outpath().replace('.json', '.shp'))
+            self.output = VectorFileIO(name='result', uri=self.get_outpath().replace('.json', '.geojson'))
         self.validate()
 
         if self.inputs:
@@ -92,7 +93,7 @@ class LeastCostProcess(GaiaProcess):
                 line.AddPoint(i[1][0], i[1][1])
                 multiline.AddGeometry(line)
 
-        shpDriver = ogr.GetDriverByName("ESRI Shapefile")
+        shpDriver = ogr.GetDriverByName("GeoJSON")
         if os.path.exists(outSHPfn):
             shpDriver.DeleteDataSource(outSHPfn)
         else:
@@ -100,6 +101,7 @@ class LeastCostProcess(GaiaProcess):
 
         outDataSource = shpDriver.CreateDataSource(outSHPfn)
         outLayer = outDataSource.CreateLayer(outSHPfn, geom_type=ogr.wkbMultiLineString )
+
         featureDefn = outLayer.GetLayerDefn()
         outFeature = ogr.Feature(featureDefn)
         outFeature.SetGeometry(multiline)
