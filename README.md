@@ -1,4 +1,4 @@
-## gaia-least-cost-plugin
+## gaia-least-cost-path-plugin
 
 This is a plugin for Gaia (https://github.com/OpenDataAnalytics/gaia) that
 analyzes the least cost path, including:
