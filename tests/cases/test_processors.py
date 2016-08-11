@@ -22,7 +22,7 @@ import unittest
 import pysal
 from gaia import formats
 from gaia.geo.geo_inputs import RasterFileIO
-from gaia_least_cost_plugin.least_cost_plugin import LeastCostProcess
+from gaia_least_cost_path_plugin.least_cost_path_plugin import LeastCostProcess
 
 testfile_path = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../data')
@@ -30,7 +30,7 @@ testfile_path = os.path.join(os.path.dirname(
 
 class TestLeastCostProcessors(unittest.TestCase):
 
-    def test_process_least_cost(self):
+    def test_process_least_cost_path(self):
         """
         Test LeastCostProcess for raster inputs
         """
@@ -45,7 +45,7 @@ class TestLeastCostProcessors(unittest.TestCase):
             process.compute()
             with open(os.path.join(
                     testfile_path,
-                    'least_cost_process_results.json')) as exp:
+                    'least_cost_path_process_results.json')) as exp:
                 expected_json = json.load(exp)
             actual_json = json.loads(process.output.read(format=formats.JSON))
             self.assertEquals(len(expected_json['features']),

@@ -1,47 +1,28 @@
-# gaia_least_cost_plugin
+## gaia-least-cost-plugin
 
-This is a simple example of a Gaia plugin project.
+This is a plugin for Gaia (https://github.com/OpenDataAnalytics/gaia) that
+analyzes the least cost path, including:
 
-The project at minimum should include a setup.py file containing an
-'entry_points' attribute that specified the location of your plugin modules:
+#### Documentation
 
-```
-  entry_points={
-    'gaia.plugins': [
-            "fake_plugin = my_gaia_plugins.fake_plugin",
-            "another_fake_plugin = my_gaia_plugins.another_fake_plugin"
-        ]
-  }
-```
+Documentation for Gaia can be found at http://gaia.readthedocs.org.
 
-Optionally, your project may also include a requirements.txt file and
-a 'gaia.cfg' configuration file.
+#### Installation
+
+  - pip install -e .
+  - pip install -r requirements.txt
+
+#### Inputs
+  - A raster image
+  - Start and end point
+
+#### License
+
+Copyright 2015 Kitware Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
 
 
-For consistency, your plugin parent module's name should start with 'gaia_'.
-
-To run this example:
-
-  - Install the 'plugins' branch of gaia
-    - git clone -b plugins https://github.com/OpenDataAnalytics/gaia.git
-    - cd gaia
-    - pip install -e .
-    - cd ..
-  - Install this repo
-    - git clone https://github.com/mbertrand/gaia_least_cost_plugin.git
-    - cd gaia_least_cost_plugin
-    - pip install -e .
-    - cd ..
-  - Run the Gaia parser on the provided test.json file:
-    - python gaia/gaia/parser.py gaia_least_cost_plugin/test.json
-
-The output should be:
-
-```
-Created LeastCostIO
-Value of Gaia plugin config: demo_setting
-Created AnotherLeastCostIO
-Created LeastCostProcess
-Compute something with LeastCostProcess
-Process complete.
-```
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

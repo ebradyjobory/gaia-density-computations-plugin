@@ -33,10 +33,10 @@ testfile_path = os.path.join(os.path.dirname(
 class TestLeastCostViaParser(unittest.TestCase):
     """Tests for the Gaia Least Cost plugin via Parser"""
 
-    def test_process_least_cost(self):
+    def test_process_least_cost_path(self):
         """Test Least Cost Process"""
         with open(os.path.join(testfile_path,
-                               'least_cost.json')) as inf:
+                               'least_cost_path.json')) as inf:
             body_text = inf.read().replace('{basepath}', testfile_path)
         process = json.loads(body_text, object_hook=deserialize)
         try:
@@ -44,7 +44,7 @@ class TestLeastCostViaParser(unittest.TestCase):
             output = json.loads(process.output.read(format=formats.JSON))
             with open(os.path.join(
                     testfile_path,
-                    'least_cost_process_results.json')) as gj:
+                    'least_cost_path_process_results.json')) as gj:
                 expected_json = json.load(gj)
             self.assertIn('features', output)
 

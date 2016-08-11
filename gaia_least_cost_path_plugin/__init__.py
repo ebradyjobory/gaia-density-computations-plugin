@@ -16,19 +16,37 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 ##############################################################################
-from setuptools import setup, find_packages
+import os
+from gaia.core import config
 
-setup(
-  name="gaia-least-cost-plugin",
-  version="0.0",
-  description="""Gaia plugin""",
-  author="Essam",
-  install_requires=["gaia>=0.0.0"],
-  packages=find_packages(),
-  include_package_data=True,
-  entry_points={
-    'gaia.plugins': [
-            "least_cost_path_plugin = gaia_least_cost_path_plugin.least_cost_path_plugin",
-        ]
-  }
-)
+try:
+    from ConfigParser import ConfigParser
+except ImportError:
+    from configparser import ConfigParser
+
+
+base_dir = os.path.join(
+    os.path.dirname(os.path.realpath(__file__)))
+
+
+def get_config(config_file=None):
+    """
+    Retrieve app configuration parameters
+    such as database connections
+    :return: configuration
+    """
+    if not config_file:
+        config_file = os.path.join(base_dir, 'gaia.cfg')
+    parser = ConfigParser()
+    parser.read(config_file)
+    config_dict = {}
+    for section in parser.sections():
+        config_dict[section] = {}
+        for key, val in parser.items(section):
+            config_dict[section][key] = val.strip('"').strip("'")
+    return config_dict
+
+
+config.update(get_config())
+
+
