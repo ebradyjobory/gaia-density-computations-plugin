@@ -19,7 +19,7 @@
 from setuptools import setup, find_packages
 
 setup(
-  name="MyGaiaPlugin",
+  name="gaia-demo-plugin",
   version="0.0",
   description="""Gaia plugin""",
   author="Matt",
