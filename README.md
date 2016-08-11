@@ -1,4 +1,4 @@
-# gaia_plugin_demo
+# gaia_least_cost_plugin
 
 This is a simple example of a Gaia plugin project.
 
@@ -28,20 +28,20 @@ To run this example:
     - pip install -e .
     - cd ..
   - Install this repo
-    - git clone https://github.com/mbertrand/gaia_plugin_demo.git
-    - cd gaia_plugin_demo
+    - git clone https://github.com/mbertrand/gaia_least_cost_plugin.git
+    - cd gaia_least_cost_plugin
     - pip install -e .
     - cd ..
   - Run the Gaia parser on the provided test.json file:
-    - python gaia/gaia/parser.py gaia_plugin_demo/test.json
+    - python gaia/gaia/parser.py gaia_least_cost_plugin/test.json
 
 The output should be:
 
 ```
-Created FakeIO
+Created LeastCostIO
 Value of Gaia plugin config: demo_setting
-Created AnotherFakeIO
-Created FakeProcess
-Compute something with FakeProcess
+Created AnotherLeastCostIO
+Created LeastCostProcess
+Compute something with LeastCostProcess
 Process complete.
 ```

@@ -1,0 +1,3 @@
+[gaia.plugins]
+least_cost_plugin = gaia_least_cost_plugin.least_cost_plugin
+

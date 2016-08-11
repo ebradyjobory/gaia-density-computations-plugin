@@ -18,16 +18,16 @@
 ##############################################################################
 from gaia.inputs import GaiaIO
 from gaia.gaia_process import GaiaProcess
-from gaia_plugin_demo import config
+from gaia_least_cost_plugin import config
 
 
-class FakeIO(GaiaIO):
+class LeastCostIO(GaiaIO):
 
     def __init__(self, uri='', **kwargs):
-        super(FakeIO, self).__init__(uri=uri, **kwargs)
-        print("Created FakeIO")
+        super(LeastCostIO, self).__init__(uri=uri, **kwargs)
+        print("Created LeastCostIO")
         print("Value of Gaia plugin config: {}".format(
-            config.get('gaia_plugin_demo')))
+            config.get('gaia_least_cost_plugin')))
 
     def read(self, *args, **kwargs):
         pass
@@ -39,14 +39,14 @@ class FakeIO(GaiaIO):
         pass
 
 
-class FakeProcess(GaiaProcess):
+class LeastCostProcess(GaiaProcess):
 
     def __init__(self, **kwargs):
-        super(FakeProcess, self).__init__(**kwargs)
-        print "Created FakeProcess"
+        super(LeastCostProcess, self).__init__(**kwargs)
+        print "Created LeastCostProcess"
 
     def compute(self):
-        print ("Compute something with FakeProcess")
+        print ("Compute something with LeastCostProcess")
 
 
 class HelperClassDoNotIncludeMe(object):
@@ -56,9 +56,9 @@ class HelperClassDoNotIncludeMe(object):
 
 
 PLUGIN_CLASS_EXPORTS = [
-    FakeProcess,
-    FakeIO,
+    LeastCostProcess,
+    LeastCostIO,
 ]
 
 if __name__ == '__main__':
-    fakeio = FakeIO(uri='foo')
+    LeastCostIO = LeastCostIO(uri='foo')

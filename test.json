@@ -1,15 +1,10 @@
 {
-  "_type": "gaia_plugin_demo.a_fake_plugin.FakeProcess",
+  "_type": "gaia_least_cost_plugin.least_cost_plugin.LeastCostProcess",
   "inputs": [
     {
       "name": "input",
-      "_type": "gaia_plugin_demo.a_fake_plugin.FakeIO",
+      "_type": "gaia_least_cost_plugin.least_cost_plugin.LeastCostIO",
       "uri": "/tmp/bogus.geojson"
-    },
-    {
-      "name": "input",
-      "_type": "gaia_plugin_demo.another_fake_plugin.AnotherFakeIO",
-      "uri": "/tmp/bogus.tif"
     }
   ],
   "var_col": "num_hospitals"

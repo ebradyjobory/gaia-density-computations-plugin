@@ -19,17 +19,16 @@
 from setuptools import setup, find_packages
 
 setup(
-  name="gaia-demo-plugin",
+  name="gaia-least-cost-plugin",
   version="0.0",
   description="""Gaia plugin""",
-  author="Matt",
+  author="Essam",
   install_requires=["gaia>=0.0.0"],
   packages=find_packages(),
   include_package_data=True,
   entry_points={
     'gaia.plugins': [
-            "a_fake_plugin = gaia_plugin_demo.a_fake_plugin",
-            "another_fake_plugin = gaia_plugin_demo.another_fake_plugin"
+            "least_cost_plugin = gaia_least_cost_plugin.least_cost_plugin",
         ]
   }
 )
