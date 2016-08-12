@@ -1,0 +1,3 @@
+[gaia.plugins]
+density_computations_plugin = gaia_density_computations_plugin.density_computations_plugin
+

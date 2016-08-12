@@ -1,7 +1,6 @@
-## gaia-least-cost-path-plugin
+## gaia-density-computations4-path-plugin
 
-This is a plugin for Gaia (https://github.com/OpenDataAnalytics/gaia) that
-analyzes the least cost path, including:
+This is a plugin for Gaia (https://github.com/OpenDataAnalytics/gaia) density computations
 
 #### Documentation
 
@@ -13,8 +12,7 @@ Documentation for Gaia can be found at http://gaia.readthedocs.org.
   - pip install -r requirements.txt
 
 #### Inputs
-  - A raster image
-  - Start and end point
+  - Vector
 
 #### License
 

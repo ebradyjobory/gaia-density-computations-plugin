@@ -22,17 +22,17 @@ import unittest
 import pysal
 from gaia import formats
 from gaia.geo.geo_inputs import RasterFileIO
-from gaia_least_cost_path_plugin.least_cost_path_plugin import LeastCostProcess
+from gaia_density_computations_plugin.density_computations_plugin import DensityComputationsProcess
 
 testfile_path = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../data')
 
 
-class TestLeastCostProcessors(unittest.TestCase):
+class TestDensityComputationsProcessors(unittest.TestCase):
 
-    def test_process_least_cost_path(self):
+    def test_process_density_computations(self):
         """
-        Test LeastCostProcess for raster inputs
+        Test DensityComputationsProcess for raster inputs
         """
 
         uri = os.path.join(testfile_path, 'globalprecip.tif')
@@ -40,12 +40,12 @@ class TestLeastCostProcessors(unittest.TestCase):
         start_point = [-71.590526, 42.659566],
         end_point = [-122.817426, 46.561380]
 
-        process = LeastCostProcess(inputs=[{ "uri": uri, "start": start_point[0], "end": end_point }])
+        process = DensityComputationsProcess(inputs=[{ "uri": uri, "start": start_point[0], "end": end_point }])
         try:
             process.compute()
             with open(os.path.join(
                     testfile_path,
-                    'least_cost_path_process_results.json')) as exp:
+                    'density_computations_process_results.json')) as exp:
                 expected_json = json.load(exp)
             actual_json = json.loads(process.output.read(format=formats.JSON))
             self.assertEquals(len(expected_json['features']),
