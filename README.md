@@ -4,7 +4,7 @@ This is a plugin for Gaia (https://github.com/OpenDataAnalytics/gaia) density co
 
 #### Documentation
 
-Documentation for Gaia can be found at http://gaia.readthedocs.org.
+Documentation for this plugin can be found at http://gaia-densitycomputations-plugin.readthedocs.org.
 
 #### Installation
 

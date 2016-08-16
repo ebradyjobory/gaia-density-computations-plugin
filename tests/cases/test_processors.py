@@ -22,7 +22,7 @@ import unittest
 import pysal
 from gaia import formats
 from gaia.geo.geo_inputs import RasterFileIO
-from gaia_density_computations_plugin.density_computations_plugin import DensityComputationsProcess
+from gaia_densitycomputations.processes import DensityComputationsProcess
 
 testfile_path = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../data')

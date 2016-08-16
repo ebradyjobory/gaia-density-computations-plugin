@@ -17,7 +17,10 @@
 #  limitations under the License.
 ##############################################################################
 import gaia.formats as formats
-import gdal, ogr, os, osr
+import gdal
+import os
+import osr
+import ogr
 import numpy as np
 import itertools
 import geopandas
@@ -25,7 +28,7 @@ import sys
 
 from gaia.inputs import GaiaIO
 from gaia.gaia_process import GaiaProcess
-from gaia_density_computations_plugin import config
+from gaia_densitycomputations import config
 from gaia.geo.geo_inputs import RasterFileIO
 from skimage.graph import route_through_array
 import matplotlib.pyplot as plt
