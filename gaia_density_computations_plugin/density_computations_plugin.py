@@ -46,13 +46,8 @@ class DensityComputationsProcess(GaiaProcess):
             self.output = RasterFileIO(name='result', uri=self.get_outpath())
             self.uri = self.inputs[0]['uri']
             self.resolution = self.inputs[0]['resolution']
-            self.outputWidth = self.inputs[0]['outputWidth']
-            self.pixelWidth = (360 / self.inputs[0]['pixelWidth'])
-            self.pixelHeight = (180 / self.inputs[0]['pixelHeight'])
-            self.rasterOrigin = self.inputs[0]['rasterOrigin']
 
     def calculateDensity(self):
-
 
         shpDriver = ogr.GetDriverByName('GeoJSON')
 
@@ -69,13 +64,15 @@ class DensityComputationsProcess(GaiaProcess):
 
         # Get the layer
         layer = dataSource.GetLayer()
+        # Get the layer extent
+        extent = layer.GetExtent()
 
         # open the layer
         # The global bounding box
-        xmin = -180.0
-        ymin = -90.0
-        xmax = 180.0
-        ymax = 90.0
+        xmin = extent[0]
+        ymin = extent[2]
+        xmax = extent[1]
+        ymax = extent[3]
 
         # Number of columns and rows
         nbrColumns = self.resolution['nCol']
@@ -103,12 +100,14 @@ class DensityComputationsProcess(GaiaProcess):
         reversed_arr = array[::-1]
         ncols = reversed_arr.shape[1]
         nrows = reversed_arr.shape[0]
-        originX = self.rasterOrigin[0]
-        originY = self.rasterOrigin[1]
+
+
+        originX = extent[0]
+        originY = extent[3]
 
         driver = gdal.GetDriverByName('GTiff')
         outRaster = driver.Create(self.output.uri, ncols, nrows, 1, gdal.GDT_Byte)
-        outRaster.SetGeoTransform((originX, self.pixelWidth, 0, originY, 0, self.pixelHeight))
+        outRaster.SetGeoTransform((originX, csx, 0, originY, 0, -csy))
         outband = outRaster.GetRasterBand(1)
         outband.WriteArray(reversed_arr)
         outRasterSRS = osr.SpatialReference()

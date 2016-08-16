@@ -5,12 +5,11 @@
       "name": "input",
       "uri": "tests/data/ports_and_harbours.geojson",
       "resolution": {
-        "nCol": 400,
-        "nRow": 300
+        "nCol": 200,
+        "nRow": 100
       },
       "pixelWidth": 10,
       "pixelHeight": 10,
-      "rasterOrigin": [-123.25745, 45.43013],
       "outputWidth": 1000
     }
   ]
