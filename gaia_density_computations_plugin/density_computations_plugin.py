@@ -97,10 +97,8 @@ class DensityComputationsProcess(GaiaProcess):
             i -= csy
 
         array = np.array(rows)
-        reversed_arr = array[::-1]
-        ncols = reversed_arr.shape[1]
-        nrows = reversed_arr.shape[0]
-
+        ncols = array.shape[1]
+        nrows = array.shape[0]
 
         originX = extent[0]
         originY = extent[3]
@@ -109,11 +107,21 @@ class DensityComputationsProcess(GaiaProcess):
         outRaster = driver.Create(self.output.uri, ncols, nrows, 1, gdal.GDT_Byte)
         outRaster.SetGeoTransform((originX, csx, 0, originY, 0, -csy))
         outband = outRaster.GetRasterBand(1)
-        outband.WriteArray(reversed_arr)
+        # Add colors to the raster image
+        outband.SetRasterColorInterpretation(gdal.GCI_PaletteIndex)
+        ct = gdal.ColorTable()
+        ct.CreateColorRamp(0,(0,0,255),14,(0,255,0))
+        ct.CreateColorRamp(15,(0,255,0),30,(127,127,0))
+        ct.CreateColorRamp(30,(127,127,0),50,(255,0,0))
+        outband.SetColorTable(ct)
+        outband.SetNoDataValue(0)
+        outband.FlushCache()
+        outband.WriteArray(array)
         outRasterSRS = osr.SpatialReference()
         outRasterSRS.ImportFromEPSG(4326)
         outRaster.SetProjection(outRasterSRS.ExportToWkt())
         outband.FlushCache()
+        outband = None
 
     def compute(self):
         self.calculateDensity()
