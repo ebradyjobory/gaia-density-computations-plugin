@@ -53,8 +53,8 @@ class TestDensityComputationsProcessors(unittest.TestCase):
                 expected_layer.GetRasterBand(1).GetStatistics(0, 1)
 
             actual_layer = gdal.Open(os.path.join(
-                                    testfile_path,
-                                    'densitycomputations_process_results.tif'),
+                testfile_path,
+                'densitycomputations_process_results.tif'),
                 gdal.GA_Update)
             actual_results = actual_layer.GetRasterBand(1).GetStatistics(0, 1)
 

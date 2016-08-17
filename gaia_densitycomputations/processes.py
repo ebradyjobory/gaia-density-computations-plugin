@@ -36,7 +36,6 @@ from math import sqrt, ceil
 
 
 class DensityComputationsProcess(GaiaProcess):
-
     """
         Density Computations.
     """

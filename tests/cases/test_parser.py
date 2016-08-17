@@ -45,11 +45,12 @@ class TestDensityComputationsViaParser(unittest.TestCase):
             process.compute()
             expected_layer = process.output.read()
             # Get layer stats
-            expected_results = expected_layer.GetRasterBand(1).GetStatistics(0, 1)
+            expected_results = \
+                expected_layer.GetRasterBand(1).GetStatistics(0, 1)
 
             actual_layer = gdal.Open(os.path.join(
-                                    testfile_path,
-                                    'densitycomputations_process_results.tif'), gdal.GA_Update)
+                testfile_path,
+                'densitycomputations_process_results.tif'), gdal.GA_Update)
             actual_results = actual_layer.GetRasterBand(1).GetStatistics(0, 1)
 
             expected_results_rounded = np.around(expected_results, decimals=2)
