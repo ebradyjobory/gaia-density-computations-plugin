@@ -56,6 +56,7 @@ class DensityComputationsProcess(GaiaProcess):
 
         dataSource = shpDriver.Open(self.uri, 0)
 
+        # Open the source file, and exit if doesn't exist
         if dataSource is None:
             print 'Could not open file ' + self.uri
             sys.exit(1)
@@ -70,8 +71,8 @@ class DensityComputationsProcess(GaiaProcess):
         # Get the layer extent
         extent = layer.GetExtent()
 
-        # open the layer
-        # The global bounding box
+        # Open the layer
+        # Set the bounding box
         xmin = extent[0]
         ymin = extent[2]
         xmax = extent[1]
@@ -106,10 +107,13 @@ class DensityComputationsProcess(GaiaProcess):
         originX = extent[0]
         originY = extent[3]
 
+        # Convert the results to geoTiff raster
         driver = gdal.GetDriverByName('GTiff')
         outRaster = driver.Create(
             self.output.uri, ncols, nrows, 1, gdal.GDT_Byte
         )
+
+        # Set layer geo transform
         outRaster.SetGeoTransform((originX, csx, 0, originY, 0, -csy))
         outband = outRaster.GetRasterBand(1)
         # Add colors to the raster image
@@ -121,9 +125,12 @@ class DensityComputationsProcess(GaiaProcess):
         outband.SetColorTable(ct)
         outband.SetNoDataValue(0)
         outband.FlushCache()
+
+        # Write the layer
         outband.WriteArray(array)
         outRasterSRS = osr.SpatialReference()
         outRasterSRS.ImportFromEPSG(4326)
+        # Set layer projection
         outRaster.SetProjection(outRasterSRS.ExportToWkt())
         outband.FlushCache()
         outband = None

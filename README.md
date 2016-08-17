@@ -1,4 +1,4 @@
-## gaia-density-computations4-path-plugin
+## gaia-densitycomputations-path-plugin
 
 This is a plugin for Gaia (https://github.com/OpenDataAnalytics/gaia) density computations
 
