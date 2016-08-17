@@ -1,5 +1,5 @@
 gaia_densitycomputations
-==================
+========================
 
 .. toctree::
    :maxdepth: 4

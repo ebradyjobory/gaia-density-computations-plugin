@@ -1,11 +1,11 @@
 gaia_densitycomputations package
-==========================
+================================
 
 Submodules
 ----------
 
 gaia_densitycomputations.processes module
------------------------------------
+-----------------------------------------
 
 .. automodule:: gaia_densitycomputations.processes
     :members:
