@@ -18,6 +18,7 @@
 ###############################################################################
 import json
 import os
+import gdal
 import unittest
 
 import pysal
@@ -30,28 +31,28 @@ testfile_path = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../data')
 
 
-class TestLeastCostViaParser(unittest.TestCase):
+class TestDensityComputationsViaParser(unittest.TestCase):
     """Tests for the Gaia Least Cost plugin via Parser"""
 
-    def test_process_least_cost_path(self):
-        """Test Least Cost Process"""
+    def test_process_densitycomputations(self):
+        """Test Density Computations Process"""
         with open(os.path.join(testfile_path,
-                               'least_cost_path.json')) as inf:
+                               'densitycomputations.json')) as inf:
             body_text = inf.read().replace('{basepath}', testfile_path)
         process = json.loads(body_text, object_hook=deserialize)
         try:
             process.compute()
-            output = json.loads(process.output.read(format=formats.JSON))
-            with open(os.path.join(
-                    testfile_path,
-                    'least_cost_path_process_results.json')) as gj:
-                expected_json = json.load(gj)
-            self.assertIn('features', output)
+            expected_layer = process.output.read()
+            # Get layer stats
+            expected_results = expected_layer.GetRasterBand(1).GetStatistics(0, 1)
 
-            self.assertEquals(len(expected_json['features']),
-                              len(output['features']))
-            self.assertIsNotNone(process.id)
-            self.assertIn(process.id, process.output.uri)
+            actual_layer = gdal.Open(os.path.join(
+                                    testfile_path,
+                                    'densitycomputations_process_results.tif'), gdal.GA_Update)
+            actual_results = actual_layer.GetRasterBand(1).GetStatistics(0, 1)
+
+            self.assertEquals(expected_results,
+                              actual_results)
         finally:
             if process:
                 process.purge()

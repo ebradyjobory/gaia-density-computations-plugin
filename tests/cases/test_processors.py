@@ -20,6 +20,7 @@ import json
 import os
 import unittest
 import pysal
+import gdal
 from gaia import formats
 from gaia.geo.geo_inputs import RasterFileIO
 from gaia_densitycomputations.processes import DensityComputationsProcess
@@ -30,26 +31,34 @@ testfile_path = os.path.join(os.path.dirname(
 
 class TestDensityComputationsProcessors(unittest.TestCase):
 
-    def test_process_density_computations(self):
+    def test_process_densitycomputations(self):
         """
         Test DensityComputationsProcess for raster inputs
         """
 
-        uri = os.path.join(testfile_path, 'globalprecip.tif')
+        uri = os.path.join(testfile_path, 'ports_and_harbours.geojson')
+        resolution = {
+            'nCol': 200,
+            'nRow': 100
+        }
+        pixelWidth = 10
+        pixelHeight = 10
+        outputWidth = 1000
 
-        start_point = [-71.590526, 42.659566],
-        end_point = [-122.817426, 46.561380]
-
-        process = DensityComputationsProcess(inputs=[{ "uri": uri, "start": start_point[0], "end": end_point }])
+        process = DensityComputationsProcess(inputs=[{ "uri": uri, "resolution": resolution, pixelWidth: 10, pixelHeight: 10, outputWidth: 1000 }])
         try:
             process.compute()
-            with open(os.path.join(
-                    testfile_path,
-                    'density_computations_process_results.json')) as exp:
-                expected_json = json.load(exp)
-            actual_json = json.loads(process.output.read(format=formats.JSON))
-            self.assertEquals(len(expected_json['features']),
-                              len(actual_json['features']))
+            expected_layer = process.output.read()
+            # Get layer stats
+            expected_results = expected_layer.GetRasterBand(1).GetStatistics(0, 1)
+
+            actual_layer = gdal.Open(os.path.join(
+                                    testfile_path,
+                                    'densitycomputations_process_results.tif'), gdal.GA_Update)
+            actual_results = actual_layer.GetRasterBand(1).GetStatistics(0, 1)
+
+            self.assertEquals(expected_results,
+                              actual_results)
         finally:
             if process:
                 process.purge()
