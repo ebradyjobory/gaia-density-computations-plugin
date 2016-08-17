@@ -20,6 +20,7 @@ import json
 import os
 import gdal
 import unittest
+import numpy as np
 
 import pysal
 
@@ -51,8 +52,10 @@ class TestDensityComputationsViaParser(unittest.TestCase):
                                     'densitycomputations_process_results.tif'), gdal.GA_Update)
             actual_results = actual_layer.GetRasterBand(1).GetStatistics(0, 1)
 
-            self.assertEquals(expected_results,
-                              actual_results)
+            expected_results_rounded = np.around(expected_results, decimals=2)
+            actual_results_rounded = np.around(actual_results, decimals=2)
+            self.assertEquals(np.all(expected_results_rounded),
+                              np.all(actual_results_rounded))
         finally:
             if process:
                 process.purge()

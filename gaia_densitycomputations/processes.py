@@ -32,7 +32,7 @@ from gaia_densitycomputations import config
 from gaia.geo.geo_inputs import RasterFileIO
 from skimage.graph import route_through_array
 import matplotlib.pyplot as plt
-from math import sqrt,ceil
+from math import sqrt, ceil
 
 
 class DensityComputationsProcess(GaiaProcess):
@@ -107,15 +107,17 @@ class DensityComputationsProcess(GaiaProcess):
         originY = extent[3]
 
         driver = gdal.GetDriverByName('GTiff')
-        outRaster = driver.Create(self.output.uri, ncols, nrows, 1, gdal.GDT_Byte)
+        outRaster = driver.Create(
+            self.output.uri, ncols, nrows, 1, gdal.GDT_Byte
+        )
         outRaster.SetGeoTransform((originX, csx, 0, originY, 0, -csy))
         outband = outRaster.GetRasterBand(1)
         # Add colors to the raster image
         outband.SetRasterColorInterpretation(gdal.GCI_PaletteIndex)
         ct = gdal.ColorTable()
-        ct.CreateColorRamp(0,(0,0,255),14,(0,255,0))
-        ct.CreateColorRamp(15,(0,255,0),30,(127,127,0))
-        ct.CreateColorRamp(30,(127,127,0),50,(255,0,0))
+        ct.CreateColorRamp(0, (0, 0, 255), 14, (0, 255, 0))
+        ct.CreateColorRamp(15, (0, 255, 0), 30, (127, 127, 0))
+        ct.CreateColorRamp(30, (127, 127, 0), 50, (255, 0, 0))
         outband.SetColorTable(ct)
         outband.SetNoDataValue(0)
         outband.FlushCache()
@@ -128,7 +130,6 @@ class DensityComputationsProcess(GaiaProcess):
 
     def compute(self):
         self.calculateDensity()
-
 
 PLUGIN_CLASS_EXPORTS = [
     DensityComputationsProcess,
