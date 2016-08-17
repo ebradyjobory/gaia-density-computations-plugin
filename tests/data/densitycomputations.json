@@ -3,14 +3,11 @@
   "inputs": [
     {
       "name": "input",
-      "uri": "tests/data/ports_and_harbours.geojson",
-      "resolution": {
+      "uri": "tests/data/ports_and_harbours.geojson"
+    }
+  ],
+  "resolution": {
         "nCol": 200,
         "nRow": 100
-      },
-      "pixelWidth": 10,
-      "pixelHeight": 10,
-      "outputWidth": 1000
-    }
-  ]
+   }
 }
