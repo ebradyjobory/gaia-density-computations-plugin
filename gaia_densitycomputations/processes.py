@@ -36,19 +36,19 @@ from math import sqrt, ceil
 
 
 class DensityComputationsProcess(GaiaProcess):
-
     """
         Density Computations.
     """
     default_output = formats.RASTER
 
-    def __init__(self, **kwargs):
+    def __init__(self, resolution, **kwargs):
         super(DensityComputationsProcess, self).__init__(**kwargs)
+
+        self.resolution = resolution
 
         if not self.output:
             self.output = RasterFileIO(name='result', uri=self.get_outpath())
             self.uri = self.inputs[0]['uri']
-            self.resolution = self.inputs[0]['resolution']
 
     def calculateDensity(self):
 
