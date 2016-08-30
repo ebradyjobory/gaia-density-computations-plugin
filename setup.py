@@ -28,7 +28,7 @@ setup(
   include_package_data=True,
   entry_points={
     'gaia.plugins': [
-            "gaia_densitycomputations.processes = gaia_densitycomputations.processes",
+            "gaia_densitycomputations.processes = gaia_densitycomputations.processes"
         ]
   }
 )

@@ -1,0 +1,13 @@
+{
+  "_type": "gaia_densitycomputations.processes.kernelDensityEstimateProcess",
+  "inputs": [
+    {
+      "name": "input",
+      "uri": "tests/data/north_korea_points.geojson"
+    }
+  ],
+  "resolution": {
+        "nCol": 200,
+        "nRow": 100
+   }
+}
